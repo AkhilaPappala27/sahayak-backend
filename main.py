@@ -15,8 +15,9 @@ class ContentRequest(BaseModel):
 @app.post("/generate-content")
 def generate_content(data: ContentRequest):
     try:
-        model = genai.GenerativeModel("gemini-pro")
-        response = model.generate_content(data.topic)
+        model = genai.GenerativeModel(model_name="gemini-pro")
+        chat = model.start_chat()
+        response = chat.send_message(data.topic)
         return {"result": response.text}
     except Exception as e:
         return {"error": str(e)}
