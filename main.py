@@ -1,18 +1,11 @@
 from fastapi import FastAPI
-
-app = FastAPI()
-
-@app.post("/generate-content")
-def generate_content(data: dict):
-    # Call Google AI API here
-    return {"result": "Generated content"}Aimport google.generativeai as genai
-from fastapi import FastAPI
 from pydantic import BaseModel
+import google.generativeai as genai
 
 app = FastAPI()
 
 # 🔐 Configure Gemini with your API key
-genai.configure(api_key="AIzaSyD5l6DZkRHEPrKu5gZOdCb_ZyfmwInCH-A")  # ← Paste your actual key here
+genai.configure(api_key="AIzaSyD5l6DZkRHEPrKu5gZOdCb_ZyfmwInCH-A")  # ← Your actual key
 
 class ContentRequest(BaseModel):
     topic: str
